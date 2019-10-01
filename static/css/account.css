@@ -1,0 +1,201 @@
+* {
+    margin: 0;
+    padding: 0;
+    font-family: 'Lato', sans-serif;
+}
+
+a,
+a:hover,
+a:visited {
+    color: white;
+    text-decoration: none;
+}
+
+.heading {
+    padding: 15px 40px 15px 40px;
+    color: #ffffff;
+    background-color: #4B3041;
+    letter-spacing: 1.2px;
+    overflow: hidden;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.heading h1 {
+    float: left;
+    font-size: 30px;
+}
+
+.floatLeft {
+    float: right;
+}
+
+.floatLeft .emailPen {
+    text-decoration: none;
+    color: #f2fbf1;
+    cursor: default;
+}
+
+.floatLeft .lgOut {
+    text-decoration: none;
+    color: #C56E86;
+    font-size: 18px;
+}
+
+.floatLeft .lgOut:hover {
+    text-decoration: underline;
+}
+
+.form-container {
+    margin: 50px auto;
+    width: 40%;
+    height: 250px;
+    padding: 30px;
+    border: #f2fbf1 2px solid;
+    background: #f2fbf1;
+    border-radius: 6px;
+    color: #C56E86;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+
+}
+
+.form-container h2 {
+    margin: 0 0 30px;
+    padding: 0px;
+    text-align: center;
+    font-size: 50px;
+}
+
+.form-container h3 {
+    font-size: 35px;
+    text-align: center;
+    color: #775a6c;
+}
+
+@media only screen and (max-width: 900px) {
+
+    .form-container {
+        width: 50%;
+    }
+
+    .form-container h2 {
+        font-size: 40px;
+    }
+
+    .inputBox label {
+        font-size: 16px;
+    }
+
+}
+
+@media only screen and (max-width: 670px) {
+
+    .form-container {
+        width: 70%;
+
+    }
+
+    .form-container h2 {
+        font-size: 30px;
+    }
+
+    .inputBox label {
+        font-size: 18px;
+    }
+
+
+}
+
+.inputBox {
+    position: relative;
+}
+
+.inputBox input {
+    width: 90%;
+    padding: 10px;
+    font-size: 20px;
+    margin-bottom: 30px;
+    border: none;
+    border-bottom: #4B3041 2px solid;
+    outline: none;
+    background: transparent;
+}
+
+.inputBox label {
+    position: absolute;
+    top: 0;
+    left: 0;
+    padding: 10px 0;
+    font-size: 20px;
+    color: #4B3041;
+    pointer-events: none;
+    transition: .2s;
+    font-weight: bold;
+
+}
+
+.inputBox input:focus~label,
+.inputBox input:valid~label {
+    top: -20px;
+    left: 0;
+    font-size: 15px;
+    color: #4B3041;
+}
+
+.errorMsg {
+    position: absolute;
+    top: 40px;
+    left: 0;
+    padding: 10px 0;
+    font-size: 13px;
+    color: #e53935;
+    font-weight: bold;
+}
+
+.contact-form>input[type="submit"] {
+    outline: none;
+    border: none;
+    width: 50%;
+    padding: 6px;
+    font-size: 20px;
+    border-radius: 10px;
+    color: #f2fbf1;
+    background-image: linear-gradient(-170deg, #4B3041, #C56E86);
+    margin-left: 24%;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.contact-form>input[type="submit"]:hover {
+    transform: scale(1.02)
+}
+
+.login {
+    display: block;
+    border-radius: 2px;
+    color: #C56E86;
+    text-decoration: none;
+    font-size: 18px;
+    text-align: right;
+    margin: 15px;
+    font-weight: bold;
+}
+
+@media only screen and (max-width: 670px) {
+    .heading {
+        padding: 10px;
+    }
+
+    .heading h1 {
+        font-size: 25px;
+    }
+
+    .floatLeft .emailPen {
+        font-size: 10px;
+    }
+
+    .floatLeft .lgOut {
+        font-size: 15px;
+    }
+
+
+}

@@ -1,0 +1,271 @@
+{% extends "layout.html" %}
+
+{% block head %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/book.css') }}">
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='js/css/star-rating-svg.min.css') }}">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.2/css/all.css" integrity="sha384-/rXc/GQVaYpyDdyxK+ecHPVYJSN9bmVFBvjA/9eOB+pb3F2w2N6fc5qB9Ew5yIns"
+    crossorigin="anonymous">
+{% endblock %}
+
+{% block body %}
+<nav class="heading">
+    <a href="{{ url_for('search') }}">
+        <h1>Bookistic</h1>
+    </a>
+    <span class="floatLeft">
+        {% if session.logged_in %}
+        <a href="{{ url_for('account_page') }}" class="emailPen">
+            <h3 id="email">Hello, {{ session.first_name }} <span id="pencil"><i class="fas fa-pencil-alt"></i></span></h3>
+        </a>
+        <a class="lgOut" href="{{ url_for('logout') }}">Log Out</a>
+        {% else %}
+        <h3>Hello, Guest</h3>
+        <a href="{{ url_for('login_page') }}" class="lgOut">Log In</a>
+        {% endif %}
+    </span>
+</nav>
+<div class="brContainer">
+    <h1>{{ book[1] }}</h1>
+    <div class="bookDetails bkContainer">
+        <ul>
+            <li>Author:<span class="bkAuthor">{{ book[2] }}</span></li>
+            <hr>
+            <li>Year:<span class="bkDetail">{{ book[3] }}</span></li>
+            <hr>
+            <li>ISBN:<span class="bkDetail">{{ book[0] }}</span></li>
+        </ul>
+    </div>
+
+    <div class="reviewBox bkContainer">
+        <ul>
+            <li>Ratings: <span class="rating">
+                    <span class="my-rating-4" id="rating" data-rating="{{ ratings.average_rating }}"></span></span>
+                </span>
+            </li>
+            <hr>
+            <li>Reviews Received: <span class="revReceive">{{ ratings.work_ratings_count }}</span></li>
+        </ul>
+    </div>
+
+
+
+    {% if reviews is defined %}
+    {% if session is defined and session.logged_in %}
+    {% for review in reviews %}
+    {% if session.user_id == review[1] %}
+    {% if loop.first %}
+    <div id="review">
+        <div class="textReview bkContainer">
+
+            <ul>
+                <li>
+                    <p>Community Reviews</p>
+                </li>
+                <hr>
+                <br>
+                <li>
+                    <div id="communityRating">
+                        <span class="user">{{ review[0].title() }}:</span>
+                        <span class="my-rating-4" id="rating" data-rating="{{ review[2] }}" id="ratingFloat"></span>
+                    </div>
+                    <p>{{ review[4].strftime("%d %b, %y %I:%M%p") }}</p>
+                    <br>
+                    <p class="reviewDetails">{{ review[3] }}
+                    </p>
+                </li>
+                <br>
+
+            </ul>
+        </div>
+
+    </div>
+    {% else %}
+    <div id="review">
+        <div class="textReview bkContainer">
+
+            <ul>
+                <br>
+                <li>
+                    <div id="communityRating">
+                        <span class="user">{{ review[0].title() }}</span>
+                        <span class="my-rating-4" id="rating" data-rating="{{ review[2] }}" id="ratingFloat"></span>
+                    </div>
+                    <p>{{ review[4].strftime("%d %b, %y %I:%M%p") }}</p>
+                    <br>
+                    <p class="reviewDetails">{{ review[3] }}
+                    </p>
+                </li>
+                <br>
+
+            </ul>
+        </div>
+    </div>
+    {% endif %}
+    {% else %}
+    {% if loop.first %}
+    <div id="review">
+        <div class="textReview bkContainer">
+
+            <ul>
+                <li>
+                    <p>Community Reviews</p>
+                </li>
+                <hr>
+                <br>
+                <li>
+                    <div id="communityRating">
+                        <span class="user">{{ review[0].title() }}:</span>
+                        <span class="my-rating-4" id="rating" data-rating="{{ review[2] }}" id="ratingFloat"></span>
+                    </div>
+                    <p>{{ review[4].strftime("%d %b, %y %I:%M%p") }}</p>
+                    <br>
+                    <p class="reviewDetails">{{ review[3] }}
+                    </p>
+                </li>
+                <br>
+
+            </ul>
+        </div>
+
+    </div>
+    {% else %}
+    <div id="review">
+        <div class="textReview bkContainer">
+
+            <ul>
+                <br>
+                <li>
+                    <div id="communityRating">
+                        <span class="user">{{ review[0].title() }}</span>
+                        <span class="my-rating-4" id="rating" data-rating="{{ review[2] }}" id="ratingFloat"></span>
+                    </div>
+                    <p>{{ review[4].strftime("%d %b, %y %I:%M%p") }}</p>
+                    <br>
+                    <p class="reviewDetails">{{ review[3] }}
+                    </p>
+                </li>
+                <br>
+
+            </ul>
+        </div>
+    </div>
+    {% endif %}
+
+    <div>
+        <div class="textReview bkContainer">
+
+            <ul>
+                <li>
+                    <p>Write your Review</p>
+                </li>
+                <hr>
+                <form action="{{ url_for('book', book_id =session.book_id)}}" method="POST">
+                    <select id="select" name="rating" required>
+                        <option value="" disabled selected>Rating</option>
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="3">4</option>
+                        <option value="3">5</option>
+                    </select>
+                    <br>
+                    <li> <textarea name="reviews" cols="45" rows="6" required placeholder="Your message..." maxlength="255"></textarea></li>
+                    <br>
+                    <li><input type="submit" value="Submit"></li>
+
+            </ul>
+        </div>
+
+    </div>
+    {% endif %}
+    {% endfor %}
+    {% else %}
+    <!-- Show login to post comments -->
+    <div class=" bkContainer">
+
+        <ul>
+            <br>
+            <li>
+                <h3>Login Required!</h3>
+
+                <br>
+                <p class="reviewDetails">
+                    You need to login to be able to post and view comments.
+                </p>
+            </li>
+            <br>
+
+        </ul>
+    </div>
+    {% endif %}
+    {% else %}
+    {% if session is defined and session.logged_in %}
+    <!-- show form -->
+    <div>
+        <div class="textReview bkContainer">
+
+            <ul>
+                <li>
+                    <p>Write your Review</p>
+                </li>
+                <hr>
+                <form action="{{ url_for('book', book_id =session.book_id)}}" method="POST">
+                    <select id="select" name="rating" required>
+                        <option value="" disabled selected>Rating</option>
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="3">4</option>
+                        <option value="3">5</option>
+                    </select>
+                    <br>
+                    <li> <textarea name="reviews" cols="45" rows="6" required placeholder="Your message..." maxlength="255"></textarea></li>
+                    <br>
+                    <li><input type="submit" value="Submit"></li>
+
+            </ul>
+        </div>
+
+    </div>
+    {% else %}
+    <!-- ask user to login -->
+    <div class=" bkContainer">
+
+        <ul>
+            <br>
+            <li>
+                <h3>Login Required!</h3>
+
+                <br>
+                <p class="reviewDetails">
+                    You need to login to be able to post and view comments.
+                </p>
+            </li>
+            <br>
+
+        </ul>
+    </div>
+    {% endif %}
+    {% endif %}
+
+</div>
+
+<script src="{{ url_for('static', filename='js/jquery.min.js') }}"></script>
+<script src="{{ url_for('static', filename='js/jquery.star-rating-svg.min.js')}}"></script>
+<script nonce="{{ csp_nonce() }}">
+    $(".my-rating-4").starRating({
+        readOnly: true,
+        totalStars: 5,
+        starShape: 'rounded',
+        starSize: 25,
+        emptyColor: 'lightgray',
+        activeColor: '#4B3041',
+        useGradient: false,
+
+    });
+</script>
+<script src="{{ url_for('static', filename='js/main.js')}}"></script>
+<script nonce="{{ csp_nonce() }}">
+    pencilHover()
+</script>
+{% endblock %}

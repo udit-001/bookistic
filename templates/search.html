@@ -1,0 +1,43 @@
+{% extends "layout.html" %}
+{% block head %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/book.css')}}">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.2/css/all.css" integrity="sha384-/rXc/GQVaYpyDdyxK+ecHPVYJSN9bmVFBvjA/9eOB+pb3F2w2N6fc5qB9Ew5yIns"
+    crossorigin="anonymous">
+<link href="https://use.fontawesome.com/releases/v5.10.1/css/svg-with-js.css" rel="stylesheet" />
+{% endblock %}
+
+{% block body %}
+<nav class="heading">
+    <a href="{{ url_for('search') }}">
+        <h1>Bookistic</h1>
+    </a>
+    <span class="floatLeft">
+        {% if session.logged_in %}
+        <a href="{{ url_for('account_page') }}" class="emailPen">
+            <h3 id="email">Hello, {{ session.first_name }} <span id="pencil"><i class="fas fa-pencil-alt"></i></span></h3>
+        </a>
+        <a href="{{ url_for('logout') }}" class="lgOut">Log Out</a>
+        {% else %}
+        <h3>Hello, Guest</h3>
+        <a href="{{ url_for('login_page') }}" class="lgOut">Log In</a>
+        {% endif %}
+    </span>
+</nav>
+<div class="SearchContainer">
+    <form class="SearchBox" id="search-form" autocomplete="off">
+        <input type="text" required name="search" id="query" autofocus />
+        <label>Search by Book Title, Author, or ISBN</label><br /><br>
+        <input type="submit" value="Search" id="submit">
+        <span class="floatRadio">
+            Sort by:
+            <input type="radio" name="order" value="isbn" required> ISBN<br>
+            <input type="radio" name="order" value="author" required> Author<br>
+            <input type="radio" name="order" value="title" required> Title
+        </span>
+    </form>
+</div>
+</div>
+<script src="{{ url_for('static', filename='js/main.js')}}"></script>
+
+<script src="{{ url_for('static', filename='js/search.min.js')}}"></script>
+{% endblock %}

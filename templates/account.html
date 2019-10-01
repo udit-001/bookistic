@@ -1,0 +1,37 @@
+{% extends "layout.html" %}
+
+{% block head %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/account.css')}}">
+<script src="{{ url_for('static', filename='js/vue.min.js') }}"></script>
+{% endblock %}
+
+{% block body %}
+<nav class="heading">
+    <a href="{{ url_for('search') }}">
+        <h1>Bookistic</h1>
+    </a>
+    <span class="floatLeft">
+        <h3 id="email">Hello, {{ session.first_name }} </h3>
+        <a class="lgOut" href="{{ url_for('logout') }}">Log Out</a>
+    </span>
+</nav>
+<div class="form-container" id="sign-form">
+    <form class="contact-form" action="{{ url_for('account_page') }}" autocomplete="off" method="POST">
+    <input type="hidden" name="_csrf_token" value="{{ csrf_token() }}">
+        <h2>Account Details</h2>
+
+        <div class="inputBox">
+            <input name="name" type="text" id="full-name" required v-on:keyup="checkName" v-model="name" v-bind:style="[nameError ? {'border-bottom-color': '#e57373'} : {'border-bottom-color' : '#4B3041'}]">
+            <label>First Name</label>
+            <span class="errorMsg" id="full-name-error">{% raw %}
+                {{ nameError }}
+                {% endraw %}</span>
+        </div>
+
+        <input type="submit" value="Update" id="sign-up-btn">
+    </form>
+
+
+</div>
+<script src="{{ url_for('static', filename='js/app.js')}}"></script>
+{% endblock %}

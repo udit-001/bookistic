@@ -1,0 +1,70 @@
+{% extends "layout.html" %}
+
+{% block head %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/style.css')}}">
+{% endblock %}
+
+
+{% block body %}
+<div class="container">
+    <h1>Bookistic</h1>
+    {% if session is defined and session.logged_in %}
+    <div class="form-container" id="thanks-form">
+        <form action="{{ url_for('search') }}" name="Search">
+            <div style="height: 100px;"></div>
+            <h3>User already logged in!</h3>
+            <input type="submit" class="regisBtn" value="Go ahead">
+        </form>
+    </div>
+    {% else %}
+    <div class="form-container" id="login-form">
+        <form class="contact-form" action="{{ url_for('login_page') }}" method="POST" autocomplete="off">
+            <input type="hidden" name="_csrf_token" value="{{ csrf_token() }}">
+            <h2>Login</h2>
+            <div class="inputBox">
+                <input type="text" required id="emailLogin" name="email" value="{{ session['email'] }}">
+                <label>Email</label>
+                {% with messages = get_flashed_messages(with_categories=true) %}
+                {% if messages %}
+                {% for category, message in messages %}
+                {% if 'email' == category %}
+                <span class="errorMsg" id="errorEmail">{{ message }}</span>
+                {% else %}
+                <span class="errorMsg" id="errorEmail"></span>
+                {% endif %}
+                {% endfor %}
+                {% else %}
+                <span class="errorMsg" id="errorEmail"></span>
+                {% endif %}
+                {% endwith %}
+            </div>
+
+            <div class="inputBox">
+                <input type="password" required name="password" id="passLogin">
+                <label>Password</label>
+                {% with messages = get_flashed_messages(with_categories=true) %}
+                {% if messages %}
+                {% for category, message in messages %}
+                {% if 'password' == category %}
+                <span class="errorMsg" id="passError">{{ message }}</span>
+                {% elif error %}
+                <span class="errorMsg" id="passError">{{ error }}</span>
+                {% else %}
+                <span class="errorMsg" id="passError"></span>
+                {% endif %}
+                {% endfor %}
+                {% else %}
+                <span class="errorMsg" id="passError"></span>
+                {% endif %}
+                {% endwith %}
+            </div>
+            <input type="submit" value="Log In" id="loginSubmitBtn">
+            <a href="{{ url_for('register_page') }}" class="login" id="toggle-btn"> Sign Up</a>
+        </form>
+    </div>
+    {% endif %}
+
+</div>
+<script src="{{ url_for('static', filename='js/main.js')}}"></script>
+
+{% endblock %}

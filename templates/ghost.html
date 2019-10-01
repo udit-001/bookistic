@@ -1,0 +1,29 @@
+{% extends "layout.html" %}
+
+<title>Spooky Ghost</title>
+{% block head %}
+<link href="https://fonts.googleapis.com/css?family=Lato|Lora" rel="stylesheet">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/spooky.css')}}">
+{% endblock %}
+
+{% block body %}
+<div id="container">
+    <div id="dialogue">
+        <h1>You found Spooky Ghost</h1>
+        <h2>The page you were looking for counldn't be found</h2>
+        <h3>He says "Happy Halloween!"</h3>
+    </div>
+    <div id="spooky">
+        <div id="body">
+            <div id="eyes"></div>
+            <div id="mouth"></div>
+            <div id="feet">
+                <div></div>
+                <div></div>
+                <div></div>
+            </div>
+        </div>
+    </div>
+    <div id="shadow"></div>
+</div>
+{% endblock %}

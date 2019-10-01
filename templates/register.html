@@ -1,0 +1,76 @@
+{% extends "layout.html" %}
+{% block head %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/style.css')}}">
+<link href="https://fonts.googleapis.com/css?family=Lato|Lora" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/vue@2.5.17/dist/vue.js"></script>
+{% endblock %}
+
+{% block body %}
+<div class="container">
+    <h1>Bookistic</h1>
+    {% if register_success %}
+    <div class="form-container" id="thanks-form">
+        <form action="{{ url_for('search') }}" name="Search">
+            <h2>Thank You</h2>
+            <h3>Registration Complete</h3>
+            <input type="submit" class="regisBtn">
+        </form>
+    </div>
+
+    {% else %}
+    <div class="form-container" id="sign-form">
+        <form class="contact-form" action="{{ url_for('register_page') }}" method="POST" autocomplete="off">
+            <input type="hidden" name="_csrf_token" value="{{ csrf_token() }}">
+            <h2>Sign Up</h2>
+
+            <div class="inputBox">
+                <input type="text" required id="full-name" name='name' value="{{ session['first_name'] }}" v-on:keyup="checkName"
+                    v-model="name" v-bind:style="[nameError ? {'border-bottom-color': '#e57373'} : {'border-bottom-color' : '#4B3041'}]">
+                <label>First Name</label>
+                <span class="errorMsg" id="full-name-error">{% raw %}
+                    {{ nameError }}
+                    {% endraw %}
+                </span>
+            </div>
+
+            <div class="inputBox">
+                <input type="text" required id="email-sign-up" name='email' value="{{ session['email'] }}" v-on:keyup="checkEmail"
+                    v-model="email" v-bind:style="[emailError ? {'border-bottom-color': '#e57373'} : {'border-bottom-color' : '#4B3041'}]">
+                <label>Email</label>
+                {% with messages = get_flashed_messages(with_categories=true) %}
+                {% if messages %}
+                {% for category, message in messages %}
+                {% if 'email' == category %}
+                <span class="errorMsg" id="email-sign-error">{% raw %}{{ emailError }}{% endraw %}{{ message }}</span>
+                {% else %}
+                <span class="errorMsg" id="email-sign-error">{% raw %}{{ emailError }}{% endraw %}</span>
+                {% endif %}
+                {% endfor %}
+                {% else %}
+                <span class="errorMsg" id="email-sign-error">{% raw %}{{ emailError }}{% endraw %}</span>
+                {% endif %}
+                {% endwith %}
+            </div>
+
+            <div class="inputBox">
+                <input type="password" id="pass-Sign-up" required name='password' v-model="pass" v-on:keyup="checkPass"
+                    v-bind:style="[passError ? {'border-bottom-color': '#e57373'} : {'border-bottom-color' : '#4B3041'}]">
+                <label>Password</label>
+                <span class="errorMsg" id="pass-sign-error">{% raw %}{{ passError }}{% endraw %}</span>
+            </div>
+
+            <div class="inputBox">
+                <input type="password" required name='cpassword' id="pass-cnf-Sign-up" v-on:keyup="checkCpass" v-model="cpass"
+                    v-bind:style="[cpassError ? {'border-bottom-color': '#e57373'} : {'border-bottom-color' : '#4B3041'}]">
+                <label>Confirm Password</label>
+                <span class="errorMsg" id="pass-cnf-sign-error">{% raw %}{{ cpassError }}{% endraw %}</span>
+            </div>
+            <input type="submit" value="Sign Up" id="sign-up-btn" :disabled="!allowSubmit">
+            <a href="{{ url_for('login_page') }}" class="login" id="toggle-btn2"> Login</a>
+        </form>
+    </div>
+    {% endif %}
+
+</div>
+<script src="{{ url_for('static', filename='js/app.js')}}"></script>
+{% endblock %}

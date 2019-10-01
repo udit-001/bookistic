@@ -1,0 +1,228 @@
+    * {
+        margin: 0;
+        padding: 0;
+
+    }
+
+    body,
+    html {
+        background-image: linear-gradient(-170deg, white, #4B3041);
+        font-family: 'Lato', sans-serif;
+    }
+
+
+    .container {
+        margin: 80px auto;
+        width: 40%;
+        height: 400px;
+        border: none;
+        border-radius: 20px;
+        position: relative;
+        background-image: linear-gradient(-45deg, #4B3041, #C56E86);
+        color: #f2fbf1;
+        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+        padding: 30px;
+    }
+
+    .container h1 {
+        margin: 150px auto;
+        font-size: 40px;
+    }
+
+    .form-container {
+        position: absolute;
+        top: -20px;
+        left: 40%;
+        width: 60%;
+        height: 460px;
+        padding: 20px;
+        border: #f2fbf1 2px solid;
+        background: #f2fbf1;
+        border-radius: 6px;
+        color: #C56E86;
+        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+
+    }
+
+    .form-container h3 {
+        font-size: 35px;
+        text-align: center;
+        color: #775a6c;
+    }
+
+    .regisBtn {
+        outline: none;
+        border: none;
+        width: 50%;
+        padding: 6px;
+        font-size: 20px;
+        border-radius: 10px;
+        color: #f2fbf1;
+        background-image: linear-gradient(-170deg, #4B3041, #C56E86);
+        margin-top: 50px;
+        margin-left: 24%;
+        cursor: pointer;
+        transition: all 0.2s ease;
+    }
+
+    .regisBtn:hover {
+        transform: scale(1.02)
+    }
+
+    @media only screen and (max-width: 1150px) {
+        .container {
+            padding: 20px;
+            width: 60%;
+        }
+
+        .contact-form {
+            left: 25%;
+        }
+    }
+
+    @media only screen and (max-width: 900px) {
+        .container {
+            padding: 15px;
+            width: 48%;
+            margin-left: 15%;
+        }
+
+        .container h1 {
+            font-size: 30px;
+        }
+
+        .form-container {
+            width: 90%;
+        }
+
+        .form-container h2 {
+            font-size: 18px;
+        }
+
+        .inputBox label {
+            font-size: 16px;
+        }
+
+    }
+
+    @media only screen and (max-width: 670px) {
+        .container {
+            height: 500px;
+            width: 60%;
+            margin-top: 20px;
+            margin-left: 10%;
+        }
+
+        .container h1 {
+            margin: 0;
+            text-align: center;
+
+        }
+
+        .form-container {
+            left: 0;
+            top: 60px;
+            width: 100%;
+
+        }
+
+        .form-container h2 {
+            font-size: 20px;
+        }
+
+        .inputBox label {
+            font-size: 18px;
+        }
+
+
+    }
+
+    .form-container h2 {
+        margin: 0 0 30px;
+        padding: 0px;
+        text-align: center;
+        font-size: 50px;
+    }
+
+    .inputBox {
+        position: relative;
+    }
+
+    .inputBox input {
+        width: 90%;
+        padding: 10px;
+        font-size: 20px;
+        margin-bottom: 30px;
+        border: none;
+        border-bottom: #4B3041 2px solid;
+        outline: none;
+        background: transparent;
+    }
+
+    .inputBox label {
+        position: absolute;
+        top: 0;
+        left: 0;
+        padding: 10px 0;
+        font-size: 20px;
+        color: #4B3041;
+        pointer-events: none;
+        transition: .2s;
+        font-weight: bold;
+
+    }
+
+    .inputBox input:focus~label,
+    .inputBox input:valid~label {
+        top: -20px;
+        left: 0;
+        font-size: 15px;
+        color: #4B3041;
+    }
+
+    .errorMsg {
+        position: absolute;
+        top: 40px;
+        left: 0;
+        padding: 10px 0;
+        font-size: 13px;
+        color: #e53935;
+        font-weight: bold;
+    }
+
+    .contact-form>input[type="submit"] {
+        outline: none;
+        border: none;
+        width: 50%;
+        padding: 6px;
+        font-size: 20px;
+        border-radius: 10px;
+        color: #f2fbf1;
+        background-image: linear-gradient(-170deg, #4B3041, #C56E86);
+        margin-left: 24%;
+        cursor: pointer;
+        transition: all 0.2s ease;
+    }
+
+    .contact-form>input[type="submit"]:hover {
+        transform: scale(1.02)
+    }
+
+    .login {
+        display: block;
+        border-radius: 2px;
+        color: #C56E86;
+        text-decoration: none;
+        font-size: 18px;
+        text-align: right;
+        margin: 15px;
+        font-weight: bold;
+    }
+
+    /* #sign-form {
+        display: none;
+    } */
+
+    /* #thanks-form {
+        display: none;
+    } */
