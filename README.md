@@ -1,4 +1,4 @@
-# BookStore
+# Bookistic
 ![Website Status](https://img.shields.io/website/https/bookistic.herokuapp.com?down_color=lightgrey&down_message=offline&style=flat-square&up_color=blue&up_message=online)
 ![Hit Count](http://hits.dwyl.io/udit-001/book-review.svg)
 
